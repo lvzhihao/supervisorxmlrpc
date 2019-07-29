@@ -7,7 +7,8 @@ import (
 )
 
 const (
-	DefaultMethodPrefix string = "supervisor."
+	DefaultSupervisorMethodPrefix string = "supervisor."
+	DefaultSystemMethodPrefix     string = "system."
 )
 
 type Client struct {
@@ -16,8 +17,12 @@ type Client struct {
 	transport http.RoundTripper // TODO if unxi:///
 }
 
-func GetRealMethod(method string) string {
-	return DefaultMethodPrefix + method
+func GetSupervisorMethod(method string) string {
+	return DefaultSupervisorMethodPrefix + method
+}
+
+func GetSystemMethod(method string) string {
+	return DefaultSystemMethodPrefix + method
 }
 
 func Connect(server string) (*Client, error) {
@@ -64,6 +69,11 @@ func (c *Client) CallString(method string, args ...interface{}) (rst string, err
 }
 
 func (c *Client) CallBool(method string, args ...interface{}) (rst bool, err error) {
+	err = c.connect.Call(method, args, &rst)
+	return
+}
+
+func (c *Client) CallStringList(method string, args ...interface{}) (rst []string, err error) {
 	err = c.connect.Call(method, args, &rst)
 	return
 }

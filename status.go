@@ -6,10 +6,9 @@ const (
 )
 
 func GetAPIVersion(client *Client) (string, error) {
-	return client.CallString(GetRealMethod(MethodGetApiVersion), nil)
+	return client.CallString(GetSupervisorMethod(MethodGetApiVersion), nil)
 }
 
 func GetSupervisorVersion(client *Client) (string, error) {
-
-	return client.CallString(GetRealMethod(MethodGetSupervisorVersion), nil)
+	return client.CallString(GetSupervisorMethod(MethodGetSupervisorVersion), nil)
 }
