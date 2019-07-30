@@ -1,6 +1,7 @@
 package supervisorxmlrpc
 
 import (
+	"os"
 	"reflect"
 	"testing"
 )
@@ -15,6 +16,17 @@ var (
 	testSupervisord   string = "/usr/bin/supervisord"
 	testSupervisorctl string = "/usr/bin/supervisorctl"
 )
+
+func init() {
+	sd := os.Getenv("TEST_SUPERVISORD")
+	if sd != "" {
+		testSupervisord = sd
+	}
+	sctl := os.Getenv("TEST_SUPERVISORCTL")
+	if sctl != "" {
+		testSupervisorctl = sctl
+	}
+}
 
 func newConnect(t *testing.T, server string) *Client {
 	client, err := Connect(server)

@@ -1,7 +1,5 @@
 language: go
 go:
-  - 1.9.x
-  - 1.10.x
   - 1.11.x
   - 1.12.x
 sudo: required
@@ -10,9 +8,9 @@ group: deprecated-2019Q2
 before_install:
 - sudo pip install --upgrade pip
 - sudo pip install supervisor
-- whereis supervisord
 - mkdir -p examples/single/var/log
 - mkdir -p examples/single/var/run
-- /usr/bin/supervisord -c exampels/single/supervisord.conf
+- /usr/local/bin/supervisord -c exampels/single/supervisord.conf
+- GO111MODULE=on go mod download
 script:
-- sleep 5 && go test -v 
+- sleep 5 && TEST_SUPERVISORD=/usr/local/bin/supervisord TEST_SUPERVISORCTL=/usr/local/bin/supervisorctl go test -v 

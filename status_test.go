@@ -2,7 +2,6 @@ package supervisorxmlrpc
 
 import (
 	"bytes"
-	"log"
 	"os/exec"
 	"reflect"
 	"strconv"
@@ -221,7 +220,6 @@ func TestReadLog(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := ReadLog(tt.args.client, tt.args.offset, tt.args.length)
-			log.Println(got, err)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ReadLog() error = %v, wantErr %v", err, tt.wantErr)
 				return
