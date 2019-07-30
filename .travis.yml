@@ -10,7 +10,7 @@ before_install:
 - sudo pip install supervisor
 - mkdir -p examples/single/var/log
 - mkdir -p examples/single/var/run
-- /usr/local/bin/supervisord -c examples/single/supervisord.conf
+- cd examples/single && /usr/local/bin/supervisord -c supervisord.conf
 - GO111MODULE=on go mod download
 script:
 - sleep 5 && TEST_SUPERVISORD=/usr/local/bin/supervisord TEST_SUPERVISORCTL=/usr/local/bin/supervisorctl go test -v 
