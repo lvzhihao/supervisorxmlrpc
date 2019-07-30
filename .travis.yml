@@ -8,9 +8,9 @@ sudo: required
 dist: trusty
 group: deprecated-2019Q2
 before_install:
-- sudo pip install supervisor
-- sudo mkdir -p examples/single/var/log
-- sudo mkdir -p examples/single/var/run
-- sudo /usr/bin/supervisord -c exampels/single/supervisord.conf
+- pip install supervisor
+- mkdir -p examples/single/var/log
+- mkdir -p examples/single/var/run
+- /usr/bin/supervisord -c exampels/single/supervisord.conf
 script:
 - sleep 5 && go test -v 
