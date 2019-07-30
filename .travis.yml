@@ -3,15 +3,17 @@ go:
   - 1.11.x
   - 1.12.x
 sudo: required
-dist: trusty
+dist: xenial
+git: 
+  depth: 1
 group: deprecated-2019Q2
 env:
-- GO111MODULE=on
+  - GO111MODULE=on
 before_install:
-- sudo pip install --upgrade pip
-- sudo pip install supervisor
-- mkdir -p examples/single/var/log
-- mkdir -p examples/single/var/run
-- cd examples/single && /usr/local/bin/supervisord -c supervisord.conf
+  - sudo pip install --upgrade pip
+  - sudo pip install supervisor
+  - mkdir -p examples/single/var/log
+  - mkdir -p examples/single/var/run
+  - cd examples/single && /usr/local/bin/supervisord -c supervisord.conf
 script:
-- go test -v 
+  - go test -v 
