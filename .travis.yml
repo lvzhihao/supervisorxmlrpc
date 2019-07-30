@@ -17,4 +17,4 @@ before_install:
   - mkdir -p examples/single/var/run
   - cd examples/single && /usr/local/bin/supervisord -c supervisord.conf
 script:
-  - go mod download && go test -v 
+  - go test -v ./...
