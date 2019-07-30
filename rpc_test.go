@@ -5,6 +5,17 @@ import (
 	"testing"
 )
 
+var (
+	testServer string   = "http://demo:demo@127.0.0.1:9015/RPC2"
+	testCmds   []string = []string{
+		"-c", "examples/single/supervisord.conf",
+		"-u", "demo",
+		"-p", "demo",
+	}
+	testSupervisord   string = "/usr/bin/supervisord"
+	testSupervisorctl string = "/usr/bin/supervisorctl"
+)
+
 func newConnect(t *testing.T, server string) *Client {
 	client, err := Connect(server)
 	if err != nil {
@@ -28,7 +39,7 @@ func TestClientCallString(t *testing.T) {
 		{
 			name: "single/getIdentificatio",
 			args: args{
-				server: "http://demo:demo@127.0.0.1:9015/RPC2",
+				server: testServer,
 				method: "supervisor.getIdentification",
 				args:   nil,
 			},
@@ -65,7 +76,7 @@ func TestClientCallBool(t *testing.T) {
 		{
 			name: "single/clearLog",
 			args: args{
-				server: "http://demo:demo@127.0.0.1:9015/RPC2",
+				server: testServer,
 				method: "supervisor.clearLog",
 				args:   nil,
 			},
@@ -102,7 +113,7 @@ func TestClientCallStringList(t *testing.T) {
 		{
 			name: "single/listMethods",
 			args: args{
-				server: "http://demo:demo@127.0.0.1:9015/RPC2",
+				server: testServer,
 				method: "system.listMethods",
 				args:   nil,
 			},

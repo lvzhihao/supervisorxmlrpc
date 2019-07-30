@@ -73,7 +73,17 @@ func (c *Client) CallBool(method string, args ...interface{}) (rst bool, err err
 	return
 }
 
+func (c *Client) CallInt(method string, args ...interface{}) (rst int, err error) {
+	err = c.connect.Call(method, args, &rst)
+	return
+}
+
 func (c *Client) CallStringList(method string, args ...interface{}) (rst []string, err error) {
 	err = c.connect.Call(method, args, &rst)
+	return
+}
+
+func (c *Client) CallStruct(method string, v interface{}, args ...interface{}) (err error) {
+	err = c.connect.Call(method, args, v)
 	return
 }
