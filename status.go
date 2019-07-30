@@ -16,7 +16,7 @@ type StatusApiInterface interface {
 	GetAPIVersion() (string, error)
 	GetSupervisorVersion() (string, error)
 	GetIdentification() (string, error)
-	GetState() (*GetStatusReturn, error)
+	GetState() (*GetStateReturn, error)
 	GetPID() (int, error)
 	ReadLog(int, int) (string, error)
 	ClearLog() (bool, error)
@@ -24,7 +24,7 @@ type StatusApiInterface interface {
 	Restart() (bool, error)
 }
 
-type GetStatusReturn struct {
+type GetStateReturn struct {
 	StateCode int    `xmlrpc:"statecode"`
 	StateName string `xmlrpc:"statename"`
 }
@@ -52,8 +52,8 @@ func (c *Client) GetIdentification() (string, error) {
 	return c.CallString(GetSupervisorMethod(MethodGetIdentification), nil...)
 }
 
-func (c *Client) GetState() (ret *GetStatusReturn, err error) {
-	ret = new(GetStatusReturn)
+func (c *Client) GetState() (ret *GetStateReturn, err error) {
+	ret = new(GetStateReturn)
 	err = c.CallStruct(GetSupervisorMethod(MethodGetState), ret, nil...)
 	return
 }
@@ -90,7 +90,7 @@ func GetIdentification(client *Client) (string, error) {
 	return client.GetIdentification()
 }
 
-func GetState(client *Client) (ret *GetStatusReturn, err error) {
+func GetState(client *Client) (ret *GetStateReturn, err error) {
 	ret, err = client.GetState()
 	return
 }
