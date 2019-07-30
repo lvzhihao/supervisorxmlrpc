@@ -9,6 +9,7 @@ git:
 group: deprecated-2019Q2
 env:
   - GO111MODULE=on
+install: true
 before_install:
   - sudo pip install --upgrade pip
   - sudo pip install supervisor
