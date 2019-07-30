@@ -9,7 +9,7 @@ dist: trusty
 group: deprecated-2019Q2
 before_install:
 - sudo pip install --upgrade pip
-- pip install supervisor
+- sudo pip install supervisor
 - mkdir -p examples/single/var/log
 - mkdir -p examples/single/var/run
 - /usr/bin/supervisord -c exampels/single/supervisord.conf
