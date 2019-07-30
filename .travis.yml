@@ -11,6 +11,6 @@ before_install:
 - sudo pip install supervisor
 - sudo mkdir -p examples/single/var/log
 - sudo mkdir -p examples/single/var/run
-- sudo /usr/local/supervisord -c exampels/single/supervisord.conf
+- sudo /usr/bin/supervisord -c exampels/single/supervisord.conf
 script:
 - sleep 5 && go test -v 
