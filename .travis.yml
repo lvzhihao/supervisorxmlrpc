@@ -8,7 +8,7 @@ git:
   depth: 1
 group: deprecated-2019Q2
 env:
-  - GO111MODULE=on
+  - GO111MODULE=on TEST_SUPERVISORD=/usr/local/bin/supervisord TEST_SUPERVISORCTL=/usr/local/bin/supervisorctl 
 before_install:
   - sudo pip install --upgrade pip
   - sudo pip install supervisor
