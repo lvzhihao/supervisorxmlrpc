@@ -14,4 +14,4 @@ before_install:
 - mkdir -p examples/single/var/run
 - cd examples/single && /usr/local/bin/supervisord -c supervisord.conf
 script:
-- sleep 5 && TEST_SUPERVISORD=/usr/local/bin/supervisord TEST_SUPERVISORCTL=/usr/local/bin/supervisorctl go test -v 
+- go test -v 
