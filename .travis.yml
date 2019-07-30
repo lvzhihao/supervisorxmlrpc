@@ -1,0 +1,16 @@
+language: go
+go:
+  - 1.9.x
+  - 1.10.x
+  - 1.11.x
+  - 1.12.x
+sudo: required
+dist: trusty
+group: deprecated-2017Q4
+before_install:
+- pip install supervisor
+- mkdir -p examples/single/var/log
+- mkdir -p examples/single/var/run
+- /usr/local/supervisord -c exampels/single/supervisord.conf
+script:
+- go test -v 
