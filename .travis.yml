@@ -6,11 +6,11 @@ go:
   - 1.12.x
 sudo: required
 dist: trusty
-group: deprecated-2017Q4
+group: deprecated-2019Q2
 before_install:
-- pip install supervisor
-- mkdir -p examples/single/var/log
-- mkdir -p examples/single/var/run
-- /usr/local/supervisord -c exampels/single/supervisord.conf
+- sudo pip install supervisor
+- sudo mkdir -p examples/single/var/log
+- sudo mkdir -p examples/single/var/run
+- sudo /usr/local/supervisord -c exampels/single/supervisord.conf
 script:
 - sleep 5 && go test -v 
