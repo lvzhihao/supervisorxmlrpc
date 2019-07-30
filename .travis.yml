@@ -12,5 +12,4 @@ before_install:
 - mkdir -p examples/single/var/run
 - cd examples/single && /usr/local/bin/supervisord -c supervisord.conf
 script:
-- GO111MODULE=on go mod download
-- sleep 5 && GO111MODULE=on TEST_SUPERVISORD=/usr/local/bin/supervisord TEST_SUPERVISORCTL=/usr/local/bin/supervisorctl go test -v 
+- sleep 5 && TEST_SUPERVISORD=/usr/local/bin/supervisord TEST_SUPERVISORCTL=/usr/local/bin/supervisorctl go test -v 
