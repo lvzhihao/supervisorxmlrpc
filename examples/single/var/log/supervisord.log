@@ -1,6 +1,0 @@
-2019-07-30 22:18:53,128 INFO waiting for single to die
-2019-07-30 22:18:53,128 INFO stopped: single (terminated by SIGTERM)
-2019-07-30 22:18:53,133 INFO RPC interface 'supervisor' initialized
-2019-07-30 22:18:53,134 INFO supervisord started with pid 7192
-2019-07-30 22:18:54,137 INFO spawned: 'single' with pid 7746
-2019-07-30 22:18:55,152 INFO success: single entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
