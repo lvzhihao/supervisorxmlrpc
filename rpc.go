@@ -1,7 +1,11 @@
 package supervisorxmlrpc
 
 import (
+	"context"
+	"fmt"
+	"net"
 	"net/http"
+	"net/url"
 
 	"github.com/kolo/xmlrpc"
 )
@@ -12,9 +16,9 @@ const (
 )
 
 type Client struct {
-	server    string            // server url http:// or unix:///
+	server    string            // server url http:// or unix://
 	connect   *xmlrpc.Client    // third part xmlrpc client
-	transport http.RoundTripper // TODO if unxi:///
+	transport http.RoundTripper // if unxi://
 }
 
 func GetSupervisorMethod(method string) string {
@@ -26,9 +30,24 @@ func GetSystemMethod(method string) string {
 }
 
 func Connect(server string) (*Client, error) {
+	u, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+	switch u.Scheme {
+	case "http":
+		return connectHttp(u, nil)
+	case "unix":
+		return connectUnix(u)
+	default:
+		return nil, fmt.Errorf("url error: %s", server)
+	}
+}
+
+func connectHttp(u *url.URL, tr http.RoundTripper) (*Client, error) {
 	c := &Client{
-		server:    server,
-		transport: nil,
+		server:    u.String(),
+		transport: tr,
 	}
 	connect, err := xmlrpc.NewClient(c.GetServer(), c.GetTransport())
 	if err != nil {
@@ -37,6 +56,19 @@ func Connect(server string) (*Client, error) {
 		c.SetConnect(connect)
 		return c, nil
 	}
+}
+
+func connectUnix(u *url.URL) (*Client, error) {
+	path := u.Path
+	transport := &http.Transport{
+		DialContext: func(_ context.Context, _, _ string) (net.Conn, error) {
+			return net.Dial("unix", path)
+		},
+	}
+	// change scheme && urlpath
+	u.Scheme = "http"
+	u.Path = "unix/RPC2"
+	return connectHttp(u, transport)
 }
 
 func (c *Client) SetConnect(connect *xmlrpc.Client) {

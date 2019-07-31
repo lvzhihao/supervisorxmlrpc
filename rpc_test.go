@@ -26,6 +26,10 @@ func init() {
 	if sctl != "" {
 		testSupervisorctl = sctl
 	}
+	ts := os.Getenv("TEST_SERVER")
+	if ts != "" {
+		testServer = ts
+	}
 }
 
 func newConnect(t *testing.T, server string) *Client {

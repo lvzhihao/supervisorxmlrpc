@@ -8,7 +8,13 @@ git:
   depth: 1
 group: deprecated-2019Q2
 env:
-  - GO111MODULE=on TEST_SUPERVISORD=/usr/local/bin/supervisord TEST_SUPERVISORCTL=/usr/local/bin/supervisorctl 
+  global:
+    - GO111MODULE=on
+    - TEST_SUPERVISORD=/usr/local/bin/supervisord
+    - TEST_SUPERVISORCTL=/usr/local/bin/supervisorctl 
+  matrix:
+    - TEST_SERVER=http://demo:demo@127.0.0.1:9015/RPC2
+    - TEST_SERVER=unix://demo:demo@/tmp/ex-supervisor-single.sock
 before_install:
   - sudo pip install --upgrade pip
   - sudo pip install supervisor
