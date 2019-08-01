@@ -16,7 +16,7 @@ type StatusApiInterface interface {
 	GetAPIVersion() (string, error)
 	GetSupervisorVersion() (string, error)
 	GetIdentification() (string, error)
-	GetState() (*GetStateReturn, error)
+	GetState() (GetStateReturn, error)
 	GetPID() (int, error)
 	ReadLog(int, int) (string, error)
 	ClearLog() (bool, error)
@@ -52,9 +52,8 @@ func (c *Client) GetIdentification() (string, error) {
 	return c.CallString(GetSupervisorMethod(MethodGetIdentification), nil...)
 }
 
-func (c *Client) GetState() (ret *GetStateReturn, err error) {
-	ret = new(GetStateReturn)
-	err = c.CallStruct(GetSupervisorMethod(MethodGetState), ret, nil...)
+func (c *Client) GetState() (ret GetStateReturn, err error) {
+	err = c.CallStruct(GetSupervisorMethod(MethodGetState), &ret, nil...)
 	return
 }
 
@@ -90,9 +89,8 @@ func GetIdentification(client *Client) (string, error) {
 	return client.GetIdentification()
 }
 
-func GetState(client *Client) (ret *GetStateReturn, err error) {
-	ret, err = client.GetState()
-	return
+func GetState(client *Client) (GetStateReturn, error) {
+	return client.GetState()
 }
 
 func GetPID(client *Client) (int, error) {

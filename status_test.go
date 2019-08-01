@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestGetSupervisorVersion(t *testing.T) {
@@ -123,7 +124,7 @@ func TestGetState(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		wantRet *GetStateReturn
+		wantRet GetStateReturn
 		wantErr bool
 	}{
 		{
@@ -131,7 +132,7 @@ func TestGetState(t *testing.T) {
 			args: args{
 				client: newConnect(t, testServer),
 			},
-			wantRet: &GetStateReturn{
+			wantRet: GetStateReturn{
 				StateCode: StateCodeRunning,
 				StateName: StateNameRunning,
 			},
@@ -327,4 +328,6 @@ func TestRestart(t *testing.T) {
 			}
 		})
 	}
+	// wait restart
+	time.Sleep(1 * time.Second)
 }
