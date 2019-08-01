@@ -124,7 +124,7 @@ func TestGetState(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		wantRet GetStateReturn
+		wantRet *GetStateReturn
 		wantErr bool
 	}{
 		{
@@ -132,7 +132,7 @@ func TestGetState(t *testing.T) {
 			args: args{
 				client: newConnect(t, testServer),
 			},
-			wantRet: GetStateReturn{
+			wantRet: &GetStateReturn{
 				StateCode: StateCodeRunning,
 				StateName: StateNameRunning,
 			},
