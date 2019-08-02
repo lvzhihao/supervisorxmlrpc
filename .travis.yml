@@ -20,6 +20,6 @@ before_install:
   - sudo pip install supervisor
   - mkdir -p examples/single/var/log
   - mkdir -p examples/single/var/run
-  - cd examples/single && /usr/local/bin/supervisord -c supervisord.conf
+  - cd examples/single && sudo /usr/local/bin/supervisord -c supervisord.conf
 script:
   - go test -v github.com/lvzhihao/supervisorxmlrpc
