@@ -18,8 +18,9 @@ env:
 before_install:
   - sudo pip install --upgrade pip
   - sudo pip install supervisor
+  - sudo apt-get install sysstat -y
   - mkdir -p examples/single/var/log
   - mkdir -p examples/single/var/run
-  - cd examples/single && sudo /usr/local/bin/supervisord -c supervisord.conf
+  - cd examples/single && /usr/local/bin/supervisord -c supervisord.conf
 script:
   - go test -v github.com/lvzhihao/supervisorxmlrpc
